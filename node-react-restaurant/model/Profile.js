@@ -1,11 +1,10 @@
 const Sequelize = require('sequelize');
 const db = require('../config/db');
 
+
 const Profile = db.define('tbl_Shop', {
-    user: {
-        type: Sequelize.UUID,
-        references: {tableName:'tbl_Users'},
-        referenceKey: 'id'
+    user_id: {
+        type: Sequelize.INTEGER
     },
     shop_url: {
         type: String
@@ -14,10 +13,9 @@ const Profile = db.define('tbl_Shop', {
         type: String
     }
 }, {
-        timestamps: false, 
+        timestamps: false,
         freezeTableName: true
     }
 );
-
 
 module.exports = Profile;

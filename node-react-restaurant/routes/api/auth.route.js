@@ -7,8 +7,8 @@ const bcrypt = require('bcryptjs');
 
 const { check, validationResult } = require('express-validator/check');
 
-
 const User = require('../../model/User');
+
 
 /* ----- 
   @route  GET api/auth
@@ -73,7 +73,7 @@ router.post(
 
             const payload = {
                 user: {
-                    email: user.email
+                    id: user.id
                 }
             }
             jwt.sign(payload, config.get('jwtSecret'), { expiresIn: 360000 }, (err, token) => {

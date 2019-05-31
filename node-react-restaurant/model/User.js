@@ -1,13 +1,10 @@
 const Sequelize = require('sequelize');
 const db = require('../config/db');
 
-const User = db.define('tbl_Users', {
-    id: {
-        type: Sequelize.UUID,
-        primaryKey: true
-    },
+const User = db.define('tbl_User', {
     email: {
         type: String,
+        require: true
     },
     password: {
         type: String
@@ -16,9 +13,9 @@ const User = db.define('tbl_Users', {
         type: String
     }
 }, {
-        timestamps: false
+        timestamps: false,
+        freezeTableName: true
     }
 );
-
 
 module.exports = User;
