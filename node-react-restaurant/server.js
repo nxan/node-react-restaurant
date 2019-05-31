@@ -1,6 +1,11 @@
 const express = require('express');
+const db = require('./config/db');
 
 const app = express();
+
+db.authenticate()
+  .then(() => console.log('Database connected....'))
+  .catch(err => console.log('Error' + err))
 
 app.use(
   express.json({

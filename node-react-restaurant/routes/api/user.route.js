@@ -2,11 +2,17 @@ const express = require('express');
 const router = express.Router();
 const db = require('../../config/db');
 const bcrypt = require('bcryptjs');
-const util = require('util')
+const jwt = require('jsonwebtoken');
+const config = require('config');
 
+const User = require('../../model/User');
 
 const { check, validationResult } = require('express-validator/check');
 
+/* ----- 
+  @route  POST api/user
+  @desc   Register User
+-----*/
 router.post(
   '/',
   [
@@ -21,7 +27,7 @@ router.post(
       min: 6
     })
   ],
-  (req, res) => {
+  async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json({
@@ -29,31 +35,42 @@ router.post(
       });
     }
 
-    try {
-      var email = req.body.email;
-      let user = "SELECT * FROM tbl_User WHERE email = '" + email + "'";
-      db.query(user)
-        .then(result => {
-          if (result != null) {
-            res.status(400).json({ errors: [{ msg: 'User already existed' }] });
-          }
-        })
+    const { name, email, password } = req.body;
 
-      // const salt = bcrypt.genSalt(10);
-      // let sql = db.query("INSERT INTO tbl_User VALUES ");
-      // sql += util.format("'%s', '%s', '%s'", data.email, data.password, data.name);
-      // db.query(sql, [data])
-      //   .then(results => {
-      //     res.status(201);
-      //     res.json({ message: 'User registered' });
-      //   });
+    try {
+      console.log(req.body);
+      let user = await User.findOne({
+        where: {
+          email: email
+        },
+      });
+
+      if (user) {
+        return res.status(400).json({ errors: [{ message: 'User already exists' }] })
+      }
+
+      user = new User({
+        email, password, name
+      });
+
+      const salt = await bcrypt.genSalt(10);
+      user.password = await bcrypt.hash(password, salt);
+      await user.save();
+
+      const payload = {
+        user: {
+          email: user.email
+        }
+      }
+      jwt.sign(payload, config.get('jwtSecret'), { expiresIn: 360000 }, (err, token) => {
+        if (err) throw err;
+        res.json({ token });
+      });
 
     } catch (err) {
       console.error(err.message);
       res.status(500).send('Server error');
     }
-
-    // res.send('User route');
   }
 );
 
