@@ -2,9 +2,12 @@ const Sequelize = require('sequelize');
 const db = require('../config/db');
 
 const User = db.define('tbl_Users', {
+    id: {
+        type: Sequelize.UUID,
+        primaryKey: true
+    },
     email: {
         type: String,
-        primaryKey: true
     },
     password: {
         type: String
@@ -16,7 +19,6 @@ const User = db.define('tbl_Users', {
         timestamps: false
     }
 );
-User.removeAttribute('id');
 
 
 module.exports = User;

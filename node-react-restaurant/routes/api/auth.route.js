@@ -21,7 +21,7 @@ router.get('/', auth, async (req, res) => {
             where: {
                 email: req.user.email
             },
-            attributes: ['email', 'name']
+            attributes: ['id', 'email', 'name']
         });
         res.json(user);
     } catch (err) {
