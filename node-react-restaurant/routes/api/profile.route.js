@@ -41,7 +41,7 @@ router.post('/', [auth, [
     check('shop_url', 'Shop URL is required').not().isEmpty()
 ]], async (req, res) => {
     const errors = validationResult(req);
-    if (!errors.isEmpty) {
+    if (!errors.isEmpty()) {
         return res.status(400).json({ errors: errors.array() });
     }
 
@@ -97,7 +97,7 @@ router.get('/', async (req, res) => {
 });
 
 /* ----- 
-  @route  GET api/profile//user/:user_id
+  @route  GET api/profile/user/:user_id
   @desc   Get user profile
 -----*/
 router.get('/user/:user_id', async (req, res) => {
