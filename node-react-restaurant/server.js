@@ -19,7 +19,7 @@ app.use('/api/user', require('./routes/api/user.route'));
 app.use('/api/auth', require('./routes/api/auth.route'));
 app.use('/api/profile', require('./routes/api/profile.route'));
 app.use('/api/place', require('./routes/api/place.route'));
-
+app.use('/api/desk', require('./routes/api/desk.route'));
 
 const PORT = process.env.PORT || 3000;
 
