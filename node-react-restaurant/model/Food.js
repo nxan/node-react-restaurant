@@ -2,26 +2,26 @@ const Sequelize = require('sequelize');
 const db = require('../config/db');
 
 
-const Desk = db.define('tbl_Ban', {
-    MaBan: {
+const Food = db.define('tbl_MonAn', {
+    MaMon: {
         type: Sequelize.INTEGER,
         primaryKey: true,
         autoIncrement: true
     },
-    TenBan: {
+    TenMon: {
         type: Sequelize.STRING
+    },
+    IDNhom: {
+        type: Sequelize.INTEGER
     },
     HienThi: {
-        type: Sequelize.BOOLEAN
-    },
-    Khu: {
-        type: Sequelize.INTEGER
-    },
-    TongMon: {
-        type: Sequelize.INTEGER
-    },
-    GIOVAO: {
         type: Sequelize.STRING
+    },
+    DonVi: {
+        type: Sequelize.INTEGER
+    },
+    DonGiaBan: {
+        type: Sequelize.DOUBLE
     }
 }, {
         timestamps: false,
@@ -29,4 +29,4 @@ const Desk = db.define('tbl_Ban', {
     }
 );
 
-module.exports = Desk;
+module.exports = Food;

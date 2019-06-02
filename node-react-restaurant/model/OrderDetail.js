@@ -2,31 +2,28 @@ const Sequelize = require('sequelize');
 const db = require('../config/db');
 
 
-const Desk = db.define('tbl_Ban', {
-    MaBan: {
+const OrderDetail = db.define('BH_tbd_BanHangChiTiet', {
+    IDBanChiTiet: {
         type: Sequelize.INTEGER,
         primaryKey: true,
         autoIncrement: true
     },
-    TenBan: {
-        type: Sequelize.STRING
+    SOHOADON: {
+        type: Sequelize.BIGINT
     },
-    HienThi: {
-        type: Sequelize.BOOLEAN
-    },
-    Khu: {
+    MaMon: {
         type: Sequelize.INTEGER
     },
-    TongMon: {
-        type: Sequelize.INTEGER
+    SoLuongTra: {
+        type: Sequelize.DOUBLE
     },
-    GIOVAO: {
-        type: Sequelize.STRING
-    }
+    SoLuong: {
+        type: Sequelize.DOUBLE
+    },
 }, {
         timestamps: false,
         freezeTableName: true
     }
 );
 
-module.exports = Desk;
+module.exports = OrderDetail;

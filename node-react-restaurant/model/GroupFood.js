@@ -2,13 +2,16 @@ const Sequelize = require('sequelize');
 const db = require('../config/db');
 
 
-const Place = db.define('tbl_Khu', {
-    MaKhu: {
+const GroupFood = db.define('tbl_Nhom', {
+    IDNhom: {
         type: Sequelize.INTEGER,
         primaryKey: true,
         autoIncrement: true
     },
-    TenKhu: {
+    TenNhom: {
+        type: String
+    },
+    HienThi: {
         type: String
     }
 }, {
@@ -17,4 +20,4 @@ const Place = db.define('tbl_Khu', {
     }
 );
 
-module.exports = Place;
+module.exports = GroupFood;
