@@ -46,7 +46,7 @@ router.post(
       });
 
       if (user) {
-        return res.status(400).json({ errors: [{ message: 'User already exists' }] })
+        return res.status(400).json({ errors: [{ msg: 'User already exists' }] })
       }
 
       user = new User({
@@ -59,7 +59,7 @@ router.post(
 
       const payload = {
         user: {
-          email: user.email
+          id: user.id
         }
       }
       jwt.sign(payload, config.get('jwtSecret'), { expiresIn: 360000 }, (err, token) => {

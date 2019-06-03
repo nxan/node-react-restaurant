@@ -13,8 +13,6 @@ app.use(
   })
 );
 
-app.get('/', (req, res) => res.send('API running'));
-
 app.use('/api/user', require('./routes/api/user.route'));
 app.use('/api/auth', require('./routes/api/auth.route'));
 app.use('/api/profile', require('./routes/api/profile.route'));
@@ -26,6 +24,6 @@ app.use('/api/order', require('./routes/api/order.route'));
 app.use('/api/orderdetail', require('./routes/api/order_detail.route'));
 
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => console.log(`Server started on port ${PORT}`));

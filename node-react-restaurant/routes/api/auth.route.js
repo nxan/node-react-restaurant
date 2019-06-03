@@ -12,14 +12,14 @@ const User = require('../../model/User');
 
 /* ----- 
   @route  GET api/auth
-  @desc   Test 
+  @desc   Test route
 -----*/
 
 router.get('/', auth, async (req, res) => {
     try {
         const user = await User.findAll({
             where: {
-                email: req.user.email
+                id: req.user.id
             },
             attributes: ['id', 'email', 'name']
         });
@@ -32,7 +32,7 @@ router.get('/', auth, async (req, res) => {
 
 /* ----- 
   @route  POST api/auth
-  @desc   Authenticate user & get token
+  @desc   Authenticate user & get token (login)
 -----*/
 router.post(
     '/',
@@ -62,13 +62,13 @@ router.post(
             });
 
             if (!user) {
-                return res.status(400).json({ errors: [{ message: 'Invalid email or password' }] })
+                return res.status(400).json({ errors: [{ msg: 'Invalid email or password' }] })
             }
 
             const isMatch = await bcrypt.compare(password, user.password);
 
             if (!isMatch) {
-                return res.status(400).json({ errors: [{ message: 'Invalid email or password' }] })
+                return res.status(400).json({ errors: [{ msg: 'Invalid email or password' }] })
             }
 
             const payload = {
