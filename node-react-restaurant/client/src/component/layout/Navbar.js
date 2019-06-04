@@ -1,7 +1,38 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React, { Fragment } from 'react';
+import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { logout } from '../../actions/auth';
+import PropTypes from 'prop-types';
 
-const Navbar = () => {
+
+const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
+    const authLinks = (
+        <ul>
+            <li>
+                <Link to='/dashboard'>
+                    <i className="fas fa-user" />{''}
+                    <span className="hide-sm"> Dashboard</span>
+                </Link>
+            </li>
+            <li>
+                <a onClick={logout} href="#!">
+                    <i className="fas fa-sign-out-alt"></i>{''}
+                    <span className="hide-sm"></span> Logout</a>
+            </li>
+
+        </ul>
+    );
+
+    const guestLink = (
+        <ul>
+            <li>
+                <Link to='/register'>Register</Link>
+            </li>
+            <li>
+                <Link to='/login'>Login</Link>
+            </li>
+        </ul>
+    );
     return (
         <nav className="navbar bg-dark">
             <h1>
@@ -9,19 +40,18 @@ const Navbar = () => {
                     <i className="fas fa-code"></i>
                 </Link>
             </h1>
-            <ul>
-                <li>
-                    <a href="profiles.html">Developers</a>
-                </li>
-                <li>
-                    <Link to='/register'>Register</Link>
-                </li>
-                <li>
-                    <Link to='/login'>Login</Link>
-                </li>
-            </ul>
+            {!loading && (<Fragment>{isAuthenticated ? authLinks : guestLink}</Fragment>)}
         </nav>
     )
 }
 
-export default Navbar
+Navbar.propTypes = {
+    logout: PropTypes.func.isRequired,
+    auth: PropTypes.object.isRequired,
+}
+
+const mapStateToProps = state => ({
+    auth: state.auth
+})
+
+export default connect(mapStateToProps, { logout })(Navbar);
