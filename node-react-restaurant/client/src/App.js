@@ -7,7 +7,7 @@ import Login from './component/auth/Login';
 import Alert from './component/layout/Alert';
 import Dashboard from './component/dashboard/Dashboard';
 import PrivateRoute from './component/routing/PrivateRoute';
-import CreatePlace from './component/forms/CreatePlace';
+import CreateFood from './component/forms/CreateFood';
 
 
 
@@ -40,7 +40,7 @@ const App = () => {
               <Route exact path="/register" component={Register} />
               <Route exact path="/login" component={Login} />
               <PrivateRoute exact path="/dashboard" component={Dashboard} />
-              <PrivateRoute exact path="/create-place" component={CreatePlace} />
+              <PrivateRoute exact path="/create-food" component={CreateFood} />
             </Switch>
           </section>
         </Fragment>

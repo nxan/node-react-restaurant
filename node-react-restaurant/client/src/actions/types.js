@@ -13,6 +13,8 @@ export const CLEAR_PROFILE = 'CLEAR_PROFILE';
 export const CREATE_PLACE = 'CREATE_PLACE';
 export const GET_PLACE = 'GET_PLACE';
 export const GET_FOOD = 'GET_FOOD';
+export const CREATE_FOOD = 'CREATE_FOOD';
+
 
 
 
